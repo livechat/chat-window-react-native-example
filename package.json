@@ -1,6 +1,6 @@
 {
-  "name": "@livechat/chat-window-react-native-example",
-  "description": "Sample LiveChat chat widget build with React Native and Visitor SDK",
+  "name": "@livechat/chat-window-ios-react-native-example",
+  "description": "Sample iOS LiveChat chat widget build with React Native and Visitor SDK",
   "contributors": ["Konrad Kruk <k.kruk@livechatinc.com>", "Mateusz Burzyński <m.burzynski@livechatinc.com>"],
   "version": "0.0.1",
   "devDependencies": {

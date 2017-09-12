@@ -1,6 +1,6 @@
-# LiveChat chat window - React Native sample implementation
+# LiveChat chat window - iOS React Native sample implementation
 
-Sample LiveChat chat widget implementation with React Native.
+Sample iOS LiveChat chat widget implementation with React Native.
 
 This demo was built using chat UI for React Native: [react-native-gifted-chat](https://github.com/FaridSafi/react-native-gifted-chat) created by [FaridSafi](https://twitter.com/FaridSafi).
 
