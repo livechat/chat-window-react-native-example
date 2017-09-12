@@ -1,3 +1,27 @@
+# LiveChat chat window - React Native sample implementation
+
+Sample LiveChat chat widget implementation with React Native.
+
+This demo was built using chat UI for React Native: [react-native-gifted-chat](https://github.com/FaridSafi/react-native-gifted-chat) created by [FaridSafi](https://twitter.com/FaridSafi).
+
+![React Native chat widget demo](chat-widget-demo.gif)
+
+### Features
+- send messages ([sendMessage](https://docs.livechatinc.com/visitor-sdk/#sendmessage) visitor SDK method)
+- receive messages ([new_message](https://docs.livechatinc.com/visitor-sdk/#new_message) visitor SDK callback)
+- send visitor's message draft ([setSneakPeek](https://docs.livechatinc.com/visitor-sdk/#setsneakpeek) visitor SDK method)
+- show agent's typing indicator ([typing_indicator](https://docs.livechatinc.com/visitor-sdk/#typing_indicator) visitor SDK callback)
+- show current availability status ([status_changed](https://docs.livechatinc.com/visitor-sdk/#status_changed) visitor SDK callback)
+- show information when chat is closed ([chat_ended](https://docs.livechatinc.com/visitor-sdk/#chat_ended) visitor SDK callback)
+
+## About LiveChat Visitor SDK
+LiveChat Visitor JS SDK allows you to perform a chat via LiveChat as a visitor using JavaScript. You can use this to create your own chat widget. 
+
+## About LiveChat
+LiveChat is a customer service software used by businesses to communicate with customers browsing their website. They see the product as a simple chat window placed on the website. The business owner and his agents, on the other hand, have access to the application designed for communication and customers service. LiveChat product can be accessed directly from the browser or using the dedicated application. 
+
+## Create React Native App documentation
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
