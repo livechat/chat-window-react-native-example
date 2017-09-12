@@ -4,10 +4,6 @@ import { init } from "@livechat/livechat-visitor-sdk";
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
 
-const visitorSDK = init({
-  license: 9042815
-})
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -51,12 +47,19 @@ export default class App extends React.Component {
         },
       },
     }
-    visitorSDK.on('new_message', this.handleNewMessage.bind(this))
-    visitorSDK.on('agent_changed', this.handleAgentChanged.bind(this))
-    visitorSDK.on('status_changed', this.handleStateChange.bind(this))
-    visitorSDK.on('typing_indicator', this.handleTypingIndicator.bind(this))
-    visitorSDK.on('chat_ended', this.handleChatEnded.bind(this))
-    visitorSDK.on('visitor_data', this.hendleVisitorData.bind(this))
+    this.visitorSDK = init({
+      license: 9042815
+    })
+    this.visitorSDK.on('new_message', this.handleNewMessage.bind(this))
+    this.visitorSDK.on('agent_changed', this.handleAgentChanged.bind(this))
+    this.visitorSDK.on('status_changed', this.handleStateChange.bind(this))
+    this.visitorSDK.on('typing_indicator', this.handleTypingIndicator.bind(this))
+    this.visitorSDK.on('chat_ended', this.handleChatEnded.bind(this))
+    this.visitorSDK.on('visitor_data', this.hendleVisitorData.bind(this))
+    this.handleInputTextChange = this.handleInputTextChange.bind(this)
+    this.handleSend = this.handleSend.bind(this)
+    this.renderFooter = this.renderFooter.bind(this)
+    this.getRenderInputToolbar = this.getRenderInputToolbar.bind(this)
   }
 
   renderFooter(props) {
@@ -100,7 +103,7 @@ export default class App extends React.Component {
   }
 
   handleInputTextChange(text) {
-    visitorSDK.setSneakPeek({ text: text })
+    this.visitorSDK.setSneakPeek({ text: text })
   }
 
   handleChatEnded() {
@@ -108,7 +111,7 @@ export default class App extends React.Component {
       messages: [{
         text: 'Chat is closed',
         _id: String(Math.random()),
-        createdAt: new Date(),
+        createdAt: Date.now(),
         user: {
           _id: 'system',
         },
@@ -122,8 +125,8 @@ export default class App extends React.Component {
     })
   }
 
-  onSend(messages) {
-    visitorSDK.sendMessage({
+  handleSend(messages) {
+    this.visitorSDK.sendMessage({
       customId: String(Math.random()),
       text: messages[0].text,
     })
@@ -146,9 +149,11 @@ export default class App extends React.Component {
 
   getVisitor() {
     const visitorId = Object.keys(this.state.users).find((userId) => this.state.users[userId].type === 'visitor')
-    if (visitorId) {
-      return this.state.users[visitorId]
-    }
+    return this.state.users[visitorId]
+  }
+
+  getRenderInputToolbar() {
+    return this.state.onlineStatus ? null : () => null
   }
 
   render() {
@@ -165,10 +170,10 @@ export default class App extends React.Component {
         <GiftedChat
             messages={this.state.messages}
             renderActions={this.renderCustomActions}
-            renderFooter={this.renderFooter.bind(this)}
-            renderInputToolbar={this.state.onlineStatus ? null : () => null}
-            onSend={(messages) => this.onSend(messages)}
-            onInputTextChanged={ this.handleInputTextChange.bind(this) }
+            renderFooter={this.renderFooter}
+            renderInputToolbar={this.getRenderInputToolbar()}
+            onSend={this.handleSend}
+            onInputTextChanged={ this.handleInputTextChange }
             user={ this.getVisitor() }
           />
       </View>
